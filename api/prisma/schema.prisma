@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -37,26 +37,10 @@ model Deliveryman {
   @@map("deliveryman")
 }
 
-model PackageProducts {
-  id String @id @default(uuid())
-
-  product_id    String
-  fk_product_id Product @relation(fields: [product_id], references: [id])
-
-  package_id    String
-  fk_package_id Package @relation(fields: [package_id], references: [id])
-
-  product_quantity Int
-
-  @@map("package_has_product")
-}
-
 model Package {
   id String @id @default(uuid())
 
   delivery Delivery?
-
-  product PackageProducts[]
 
   user_id    String
   fk_user_id User   @relation(fields: [user_id], references: [id])
@@ -77,14 +61,3 @@ model Delivery {
   @@map("delivery")
 }
 
-model Product {
-  id          String  @id @default(uuid())
-  name        String
-  brand       String
-  description String
-  price       Decimal
-
-  package PackageProducts[]
-
-  @@map("product")
-}
