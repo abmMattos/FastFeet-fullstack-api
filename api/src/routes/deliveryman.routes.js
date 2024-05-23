@@ -7,5 +7,8 @@ const deliverymanRoutes = Router()
 const deliverymanController = new DeliverymanController()
 
 deliverymanRoutes.post('/register', deliverymanController.register)
+deliverymanRoutes.get('/login', deliverymanController.login)
+deliverymanRoutes.delete('/delete', deliverymanController.delete)
+deliverymanRoutes.put('/update', deliverymanController.update)
 
 module.exports = deliverymanRoutes
