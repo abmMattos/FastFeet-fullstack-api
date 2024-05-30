@@ -10,5 +10,8 @@ deliverymanRoutes.post('/register', deliverymanController.register)
 deliverymanRoutes.get('/login', deliverymanController.login)
 deliverymanRoutes.delete('/delete', deliverymanController.delete)
 deliverymanRoutes.put('/update', deliverymanController.update)
+deliverymanRoutes.get('/', deliverymanController.findMany)
+deliverymanRoutes.get('/findManyDeliveryUser', deliverymanController.findManyPackage)
+
 
 module.exports = deliverymanRoutes

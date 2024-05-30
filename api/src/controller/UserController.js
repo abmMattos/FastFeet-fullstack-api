@@ -1,14 +1,13 @@
-const { PrismaClient } = require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient()
 
-class DeliverymanController {
-
+class UserController {
 
     async register(request, response) {
         try {
             const { name, email, cpf, password, location } = request.body
-            const register = await prisma.deliveryman.create({
+            const register = await prisma.user.create({
                 data: {
                     name,
                     email,
@@ -17,36 +16,36 @@ class DeliverymanController {
                     location
                 }
             })
-            response.json(register)
+            return response.json(register)
         } catch {
-            return response.status(409).send("Erro ao criar DeliveryMan!")
+            return response.status(409).send("Erro ao criar Usuário!")
         }
     }
 
     async login(request, response) {
         try {
             const { cpf, password } = request.body
-            await prisma.deliveryman.findUnique({
+            const user = await prisma.user.findUnique({
                 where: {
                     cpf: cpf,
                     password: password
                 }
             })
-            return response.status(200).send("Login realizado!")
+            return response.json(user)
         } catch {
-            return response.status(404).send("Erro ao logar!")
+            return response.status(404).send("Login falhou!")
         }
     }
 
     async delete(request, response) {
         try {
             const { id } = request.body
-            await prisma.deliveryman.delete({
+            await prisma.user.delete({
                 where: {
                     id
                 }
             })
-            response.status(200).send("DeliveryMan excluido!")
+            return response.status(200).send("Usuário excluido!")
         } catch {
             return response.status(409).send("Erro ao excluir!")
         }
@@ -55,7 +54,7 @@ class DeliverymanController {
     async update(request, response) {
         try {
             const { id, name, email, password, location } = request.body
-            await prisma.deliveryman.update({
+            const user = await prisma.user.update({
                 where: {
                     id
                 },
@@ -66,31 +65,26 @@ class DeliverymanController {
                     location
                 }
             })
-            return response.status(200).send("DeliveryMan atualizado com sucesso!")
+            return response.json(user)
         } catch {
-            return response.status(409).send("Erro ao atualizar DeliveryMan!")
+            return response.status(409).send("Erro ao atualizar Usuário!")
         }
     }
 
     async findMany(request, response) {
         try {
-            const delivery = await prisma.deliveryman.findMany({
-                select: {
-                    deliveryMan_id: true,
-                    user_id: true
-                },
-            });
+            const user = await prisma.user.findMany();
 
-           return response.json(delivery)
+            response.json(user)
         } catch (err) {
-            return response.status(409).send("Erro ao buscar DeliveryMan!")
+            return response.status(409).send("Erro ao buscar Usuário!")
         }
     }
 
     async findManyPackage(request, response) {
         try {
             const { id } = request.body
-            const delivery = await prisma.deliveryman.findUnique({
+            const user = await prisma.user.findUnique({
                 where: {
                     id: id
                 },
@@ -99,11 +93,11 @@ class DeliverymanController {
                 }
             })
 
-            return response.json(delivery)
+            return response.json(user)
         } catch (err) {
-            return response.status(409).send("Erro ao buscar Packages do DeliveryMan!")
+            return response.status(409).send("Erro ao buscar Packages do Usuário!")
         }
     }
 }
 
-module.exports = DeliverymanController
+module.exports = UserController

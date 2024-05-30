@@ -19,7 +19,7 @@ class AdminController {
             })
             response.json(register)
         } catch {
-            return response.status(409).send()
+            return response.status(409).send("Falha em criar admin!")
         }
     }
 
@@ -32,9 +32,9 @@ class AdminController {
                     password: password
                 }
             })
-            return response.status(200).send()
+            return response.status(200).send("Login realizado com sucesso!")
         } catch {
-            return response.status(404).send()
+            return response.status(404).send("Login falhou!")
         }
     }
 
@@ -46,9 +46,9 @@ class AdminController {
                     id
                 }
             })
-            response.status(200).send()
+            return response.status(200).send("Admin deletado com sucesso!")
         } catch {
-            return response.status(409).send()
+            return response.status(409).send("Erro ao deletar admin")
         }
     }
 
@@ -65,9 +65,9 @@ class AdminController {
                     password
                 }
             })
-            return response.status(200).send()
+            return response.status(200).send("Alterações realizadas com sucesso!")
         } catch {
-            return response.status(409).send()
+            return response.status(409).send("Alterações não realizadas!")
         }
     }
 }

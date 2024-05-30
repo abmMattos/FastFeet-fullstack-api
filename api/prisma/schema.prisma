@@ -29,6 +29,7 @@ model User {
   email    String @unique
   cpf      String @unique
   password String
+  location String
 
   package Package[]
 
@@ -41,32 +42,24 @@ model Deliveryman {
   email    String @unique
   cpf      String @unique
   password String
+  location String?
 
-  delivery Delivery[]
+  package Package[]
 
   @@map("deliveryman")
 }
 
 model Package {
   id String @id @default(uuid())
-
-  delivery Delivery?
+  status String
+  location String?
+  photo String?
+  
+  deliveryman_id    String
+  fk_deliveryman_id Deliveryman   @relation(fields: [deliveryman_id], references: [id])
 
   user_id    String
   fk_user_id User   @relation(fields: [user_id], references: [id])
 
   @@map("package")
-}
-
-model Delivery {
-  id     String @id @default(uuid())
-  status String
-
-  package_id    String  @unique
-  fk_package_id Package @relation(fields: [package_id], references: [id])
-
-  deliveryman_id    String
-  fk_deliveryman_id Deliveryman @relation(fields: [deliveryman_id], references: [id])
-
-  @@map("delivery")
 }
