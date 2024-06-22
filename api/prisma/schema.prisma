@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Admin {
@@ -37,10 +37,10 @@ model User {
 }
 
 model Deliveryman {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  email    String @unique
-  cpf      String @unique
+  email    String  @unique
+  cpf      String  @unique
   password String
   location String?
 
@@ -50,13 +50,13 @@ model Deliveryman {
 }
 
 model Package {
-  id String @id @default(uuid())
-  status String
+  id       String  @id @default(uuid())
+  status   String
   location String?
-  photo String?
-  
+  photo    String?
+
   deliveryman_id    String
-  fk_deliveryman_id Deliveryman   @relation(fields: [deliveryman_id], references: [id])
+  fk_deliveryman_id Deliveryman @relation(fields: [deliveryman_id], references: [id])
 
   user_id    String
   fk_user_id User   @relation(fields: [user_id], references: [id])
