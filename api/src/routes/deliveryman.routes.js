@@ -1,17 +1,19 @@
-const { Router } = require('express')
+const { Router } = require('express');
 
-const DeliverymanController = require("../controller/DeliverymanController")
+const DeliverymanController = require('../controller/DeliverymanController');
 
-const deliverymanRoutes = Router()
+const deliverymanRoutes = Router();
 
-const deliverymanController = new DeliverymanController()
+const deliverymanController = new DeliverymanController();
 
-deliverymanRoutes.post('/register', deliverymanController.register)
-deliverymanRoutes.get('/login', deliverymanController.login)
-deliverymanRoutes.delete('/delete', deliverymanController.delete)
-deliverymanRoutes.put('/update', deliverymanController.update)
-deliverymanRoutes.get('/', deliverymanController.findMany)
-deliverymanRoutes.get('/findManyDeliveryUser', deliverymanController.findManyPackage)
+deliverymanRoutes.post('/register', deliverymanController.register);
+deliverymanRoutes.get('/login', deliverymanController.login);
+deliverymanRoutes.delete('/delete', deliverymanController.delete);
+deliverymanRoutes.put('/update', deliverymanController.update);
+deliverymanRoutes.get('/', deliverymanController.findMany);
+deliverymanRoutes.get(
+  '/findManyDeliveryUser',
+  deliverymanController.findManyPackage,
+);
 
-
-module.exports = deliverymanRoutes
+module.exports = deliverymanRoutes;

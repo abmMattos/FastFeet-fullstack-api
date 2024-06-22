@@ -1,14 +1,17 @@
-const { Router } = require("express");
-const PackageController = require("../controller/packageController");
+const { Router } = require('express');
+const PackageController = require('../controller/packageController');
 
-const packageController = new PackageController()
+const packageController = new PackageController();
 
-const packageRoutes = Router()
+const packageRoutes = Router();
 
-packageRoutes.post('/register', packageController.register)
-packageRoutes.delete('/delete', packageController.delete)
-packageRoutes.put('/update', packageController.update)
-packageRoutes.get('/', packageController.findMany)
-packageRoutes.get('/findManyDeliveryUser', packageController.findManyDeliveryUser)
+packageRoutes.post('/register', packageController.register);
+packageRoutes.delete('/delete', packageController.delete);
+packageRoutes.put('/update', packageController.update);
+packageRoutes.get('/', packageController.findMany);
+packageRoutes.get(
+  '/findManyDeliveryUser',
+  packageController.findManyDeliveryUser,
+);
 
-module.exports = packageRoutes
+module.exports = packageRoutes;
