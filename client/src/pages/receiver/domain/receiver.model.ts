@@ -1,4 +1,4 @@
-export interface Deliveryman {
+export interface Receiver {
   id: string;
   name: string;
   email: string;

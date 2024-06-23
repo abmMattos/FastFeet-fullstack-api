@@ -52,7 +52,8 @@ class UserController {
 
   async update(request, response) {
     try {
-      const { id, name, email, password, location } = request.body;
+      const { id } = request.params;
+      const { name, email, password, location } = request.body;
       const user = await prisma.user.update({
         where: {
           id,
@@ -73,6 +74,17 @@ class UserController {
   async findMany(request, response) {
     try {
       const user = await prisma.user.findMany();
+
+      response.json(user);
+    } catch (err) {
+      return response.status(409).send('Erro ao buscar Usuário!');
+    }
+  }
+
+  async findOne(request, response) {
+    try {
+      const { id } = request.params;
+      const user = await prisma.user.findFirst({ where: { id: id } });
 
       response.json(user);
     } catch (err) {

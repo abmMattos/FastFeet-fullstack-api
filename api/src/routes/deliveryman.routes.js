@@ -11,6 +11,7 @@ deliverymanRoutes.get('/login', deliverymanController.login);
 deliverymanRoutes.delete('/delete', deliverymanController.delete);
 deliverymanRoutes.put('/update/:id', deliverymanController.update);
 deliverymanRoutes.get('/', deliverymanController.findMany);
+deliverymanRoutes.get('/:id', deliverymanController.findOne);
 deliverymanRoutes.get(
   '/findManyDeliveryUser',
   deliverymanController.findManyPackage,

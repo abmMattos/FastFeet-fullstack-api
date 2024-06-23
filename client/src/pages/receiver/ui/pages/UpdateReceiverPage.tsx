@@ -15,16 +15,16 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Header from '../../../../components/Header.tsx';
 
-type UpdateDeliverymanData = {
+type UpdateReceiverData = {
   name: string;
   email: string;
   cpf: string;
   location: string;
 };
 
-export const UpdateDeliverymanPage = () => {
+export const UpdateReceiverPage = () => {
   const { id } = useParams();
-  const [formData, setFormData] = useState<UpdateDeliverymanData>({
+  const [formData, setFormData] = useState<UpdateReceiverData>({
     name: '',
     email: '',
     cpf: '',
@@ -32,24 +32,24 @@ export const UpdateDeliverymanPage = () => {
   });
 
   useEffect(() => {
-    const fetchDeliverymanData = async () => {
+    const fetchReceiverData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/deliveryman/${id}`,
+          `${import.meta.env.VITE_API_URL}/user/${id}`,
         );
-        const deliverymanData = response.data;
+        const receiverData = response.data;
         setFormData({
-          name: deliverymanData.name,
-          email: deliverymanData.email,
-          cpf: deliverymanData.cpf,
-          location: deliverymanData.location,
+          name: receiverData.name,
+          email: receiverData.email,
+          cpf: receiverData.cpf,
+          location: receiverData.location,
         });
       } catch (error) {
-        console.error('Erro ao buscar dados do entregador:', error);
+        console.error('Erro ao buscar dados do destinatário:', error);
       }
     };
 
-    fetchDeliverymanData();
+    fetchReceiverData();
   }, [id]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,14 +60,14 @@ export const UpdateDeliverymanPage = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}/deliveryman/update/${id}`,
+        `${import.meta.env.VITE_API_URL}/user/update/${id}`,
         formData,
       );
       console.log(response.data);
       toast.success('Entregador atualizado com sucesso!');
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao atualizar entregador.');
+      toast.error('Erro ao atualizar destinatário.');
     }
   };
 
@@ -84,14 +84,14 @@ export const UpdateDeliverymanPage = () => {
           >
             <Link
               className={'flex justify-center items-center'}
-              to={'/entregadores'}
+              to={'/destinatarios'}
             >
               <ArrowLeft size={'20'} className={'mr-2'} /> VOLTAR
             </Link>
           </Button>
           <Card>
             <CardHeader>
-              <CardTitle>ATUALIZAR UM ENTREGADOR</CardTitle>
+              <CardTitle>ATUALIZAR UM DESTINATÁRIO</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
@@ -130,7 +130,7 @@ export const UpdateDeliverymanPage = () => {
                   </div>
                 </div>
                 <Button className={'w-full mt-4'} type="submit">
-                  Atualizar entregador
+                  Atualizar destinatário
                 </Button>
               </form>
             </CardContent>
@@ -141,4 +141,4 @@ export const UpdateDeliverymanPage = () => {
   );
 };
 
-export default UpdateDeliverymanPage;
+export default UpdateReceiverPage;

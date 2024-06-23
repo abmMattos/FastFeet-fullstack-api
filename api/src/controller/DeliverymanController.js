@@ -71,6 +71,17 @@ class DeliverymanController {
     }
   }
 
+  async findOne(request, response) {
+    try {
+      const { id } = request.params;
+      const user = await prisma.deliveryman.findFirst({ where: { id: id } });
+
+      response.json(user);
+    } catch (err) {
+      return response.status(409).send('Erro ao buscar Usuário!');
+    }
+  }
+
   async findMany(request, response) {
     try {
       const delivery = await prisma.deliveryman.findMany({});

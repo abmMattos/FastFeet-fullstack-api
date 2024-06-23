@@ -43,18 +43,39 @@ export const UpdatePackagePage = () => {
   useEffect(() => {
     const fetchPackageData = async () => {
       try {
-        const response = await axios.get(
+        const packageResponse = await axios.get(
           `${import.meta.env.VITE_API_URL}/package/${id}`,
         );
-        const { user, deliveryman, ...packageData } = response.data;
+
+        if (!packageResponse.data) {
+          throw new Error('Package data not found');
+        }
+
+        const deliverymanResponse = await axios.get(
+          `${import.meta.env.VITE_API_URL}/deliveryman/${packageResponse.data.deliveryman_id}`,
+        );
+
+        if (!deliverymanResponse.data) {
+          throw new Error('Deliveryman data not found');
+        }
+
+        const userResponse = await axios.get(
+          `${import.meta.env.VITE_API_URL}/user/${packageResponse.data.user_id}`,
+        );
+
+        if (!userResponse.data) {
+          throw new Error('User data not found');
+        }
+
         setFormData({
-          user_name: user.name,
-          status: packageData.status,
-          deliveryman_name: deliveryman.name,
-          location: packageData.location,
+          user_name: userResponse.data.name,
+          status: packageResponse.data.status,
+          deliveryman_name: deliverymanResponse.data.name,
+          location: packageResponse.data.location,
         });
       } catch (error) {
         console.error('Erro ao buscar dados do pacote:', error);
+        toast.error('Erro ao buscar dados do pacote.');
       }
     };
 

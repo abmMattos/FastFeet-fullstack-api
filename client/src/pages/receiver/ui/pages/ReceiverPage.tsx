@@ -1,10 +1,10 @@
 import { Header } from '../../../../components/Header.tsx';
-import DeliverymanTable from '../components/DeliverymanTable.tsx';
+import ReceiverTable from '../components/ReceiverTable.tsx';
 import { Button } from '../../../../components/ui/button.tsx';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 
-export const DeliverymanPage = () => {
+export const ReceiverPage = () => {
   return (
     <>
       <section className={'bg-emerald-900 min-h-screen'}>
@@ -17,18 +17,18 @@ export const DeliverymanPage = () => {
           >
             <Link
               className={'flex justify-center items-center'}
-              to={'/entregadores/registrar'}
+              to={'/destinatarios/registrar'}
             >
-              <PlusIcon className={'mr-2'} /> REGISTRAR ENTREGADOR
+              <PlusIcon className={'mr-2'} /> REGISTRAR DESTINATÁRIO
             </Link>
           </Button>
-          <DeliverymanTable />
-          <Link to={'/entregadores/registrar'} />
-          <Link to={'/entregadores/editar/:id'} />
+          <ReceiverTable />
+          <Link to={'/destinatarios/registrar'} />
+          <Link to={'/destinatarios/editar/:id'} />
         </div>
       </section>
     </>
   );
 };
 
-export default DeliverymanPage;
+export default ReceiverPage;

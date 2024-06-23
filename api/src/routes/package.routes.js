@@ -9,6 +9,7 @@ packageRoutes.post('/register', packageController.register);
 packageRoutes.delete('/delete', packageController.delete);
 packageRoutes.put('/update/:id', packageController.update);
 packageRoutes.get('/', packageController.findMany);
+packageRoutes.get('/:id', packageController.findOne);
 packageRoutes.post(
   '/findManyDeliveryUser',
   packageController.findManyDeliveryUsers,

@@ -4,21 +4,21 @@ import { Card, CardContent } from '../../../../components/ui/card.tsx';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { Pen, Trash } from 'lucide-react';
-import { Deliveryman } from '../../domain/deliveryman.model.ts';
+import { Receiver } from '../../domain/receiver.model.ts';
 
-export const DeliverymanTable = () => {
-  const [deliverymanData, setDeliverymanData] = useState<Deliveryman[]>([]);
+export const ReceiverTable = () => {
+  const [deliverymanData, setReceiverData] = useState<Receiver[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const deliverymanResponse = await axios.get<Deliveryman[]>(
-          `${import.meta.env.VITE_API_URL}/deliveryman`,
+        const deliverymanResponse = await axios.get<Receiver[]>(
+          `${import.meta.env.VITE_API_URL}/user`,
         );
-        const deliverymen = deliverymanResponse.data;
-        setDeliverymanData(deliverymen);
+        const receivers = deliverymanResponse.data;
+        setReceiverData(receivers);
       } catch (error) {
         console.error('Erro ao buscar dados:', error);
       } finally {
@@ -31,19 +31,19 @@ export const DeliverymanTable = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/deliveryman/delete`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/user/delete`, {
         data: { id },
       });
-      setDeliverymanData(deliverymanData.filter((dm) => dm.id !== id));
-      toast.success('Entregador deletado com sucesso!');
+      setReceiverData(deliverymanData.filter((dm) => dm.id !== id));
+      toast.success('Destinatario deletado com sucesso!');
     } catch (error) {
-      console.error('Erro ao deletar entregador:', error);
-      toast.error('Erro ao deletar entregador.');
+      console.error('Erro ao deletar destinatário:', error);
+      toast.error('Erro ao deletar destinatário.');
     }
   };
 
   const handleEdit = (id: string) => {
-    navigate(`/entregadores/editar/${id}`);
+    navigate(`/destinatarios/editar/${id}`);
   };
 
   if (loading) {
@@ -126,4 +126,4 @@ export const DeliverymanTable = () => {
   );
 };
 
-export default DeliverymanTable;
+export default ReceiverTable;

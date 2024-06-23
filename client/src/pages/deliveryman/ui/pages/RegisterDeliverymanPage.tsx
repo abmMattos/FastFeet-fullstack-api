@@ -10,31 +10,24 @@ import axios from 'axios';
 import { Label } from '../../../../components/ui/label.tsx';
 import { Input } from '../../../../components/ui/input.tsx';
 import { Button } from '../../../../components/ui/button.tsx';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '../../../../components/ui/select.tsx';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
-type RegisterPackageData = {
-  user_name: string;
-  status: string;
-  deliveryman_name: string;
+type RegisterDeliverymanData = {
+  name: string;
+  email: string;
+  password: string;
+  cpf: string;
   location: string;
 };
 
-export const PackagesPage = () => {
-  const [formData, setFormData] = useState<RegisterPackageData>({
-    user_name: '',
-    status: '',
-    deliveryman_name: '',
+export const RegisterDeliverymanPage = () => {
+  const [formData, setFormData] = useState<RegisterDeliverymanData>({
+    name: '',
+    email: '',
+    password: '',
+    cpf: '',
     location: '',
   });
 
@@ -42,28 +35,25 @@ export const PackagesPage = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleStatusChange = (value: string) => {
-    setFormData({ ...formData, status: value });
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/package/register`,
+        `${import.meta.env.VITE_API_URL}/deliveryman/register`,
         formData,
       );
       console.log(response.data);
-      toast.success('Encomenda registrada com sucesso!');
+      toast.success('Entregador registrado com sucesso!');
       setFormData({
-        user_name: '',
-        status: '',
-        deliveryman_name: '',
+        name: '',
+        email: '',
+        password: '',
+        cpf: '',
         location: '',
       });
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao cadastrar encomenda.');
+      toast.error('Erro ao registrar entregador.');
     }
   };
 
@@ -80,51 +70,49 @@ export const PackagesPage = () => {
           >
             <Link
               className={'flex justify-center items-center'}
-              to={'/encomendas'}
+              to={'/entregadores'}
             >
               <ArrowLeft size={'20'} className={'mr-2'} /> VOLTAR
             </Link>
           </Button>
           <Card>
             <CardHeader>
-              <CardTitle>REGISTRAR UMA ENCOMENDA</CardTitle>
+              <CardTitle>REGISTRAR UM ENTREGADOR</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
                 <div className="grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="user_name">Nome do usuário</Label>
+                    <Label htmlFor="name">Nome</Label>
                     <Input
-                      id="user_name"
-                      value={formData.user_name}
+                      id="name"
+                      value={formData.name}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="status">Status</Label>
-                    <Select
-                      value={formData.status}
-                      onValueChange={handleStatusChange}
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Selecione um status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectLabel>Status</SelectLabel>
-                          <SelectItem value="ENTREGUE">ENTREGUE</SelectItem>
-                          <SelectItem value="DEVOLVIDA">DEVOLVIDA</SelectItem>
-                          <SelectItem value="RETIRADA">RETIRADA</SelectItem>
-                          <SelectItem value="AGUARDANDO">AGUARDANDO</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type={'email'}
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="deliveryman_name">Nome do entregador</Label>
+                    <Label htmlFor="email">Senha</Label>
                     <Input
-                      id="deliveryman_name"
-                      value={formData.deliveryman_name}
+                      id="password"
+                      type={'password'}
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="cpf">CPF</Label>
+                    <Input
+                      id="cpf"
+                      value={formData.cpf}
                       onChange={handleChange}
                     />
                   </div>
@@ -138,7 +126,7 @@ export const PackagesPage = () => {
                   </div>
                 </div>
                 <Button className={'w-full mt-4'} type="submit">
-                  Registrar encomenda
+                  Registrar entregador
                 </Button>
               </form>
             </CardContent>
@@ -149,4 +137,4 @@ export const PackagesPage = () => {
   );
 };
 
-export default PackagesPage;
+export default RegisterDeliverymanPage;

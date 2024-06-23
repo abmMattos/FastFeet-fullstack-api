@@ -1,56 +1,35 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { Header } from '../../../../components/Header.tsx';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from '../../../../components/ui/card.tsx';
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import axios from 'axios';
 import { Label } from '../../../../components/ui/label.tsx';
 import { Input } from '../../../../components/ui/input.tsx';
 import { Button } from '../../../../components/ui/button.tsx';
 import toast, { Toaster } from 'react-hot-toast';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import Header from '../../../../components/Header.tsx';
 
-type UpdateDeliverymanData = {
+type RegisterReceiverData = {
   name: string;
   email: string;
+  password: string;
   cpf: string;
   location: string;
 };
 
-export const UpdateDeliverymanPage = () => {
-  const { id } = useParams();
-  const [formData, setFormData] = useState<UpdateDeliverymanData>({
+export const RegisterReceiverPage = () => {
+  const [formData, setFormData] = useState<RegisterReceiverData>({
     name: '',
     email: '',
+    password: '',
     cpf: '',
     location: '',
   });
-
-  useEffect(() => {
-    const fetchDeliverymanData = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/deliveryman/${id}`,
-        );
-        const deliverymanData = response.data;
-        setFormData({
-          name: deliverymanData.name,
-          email: deliverymanData.email,
-          cpf: deliverymanData.cpf,
-          location: deliverymanData.location,
-        });
-      } catch (error) {
-        console.error('Erro ao buscar dados do entregador:', error);
-      }
-    };
-
-    fetchDeliverymanData();
-  }, [id]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -59,15 +38,22 @@ export const UpdateDeliverymanPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}/deliveryman/update/${id}`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/register`,
         formData,
       );
       console.log(response.data);
-      toast.success('Entregador atualizado com sucesso!');
+      toast.success('Entregador registrado com sucesso!');
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        cpf: '',
+        location: '',
+      });
     } catch (error) {
       console.error(error);
-      toast.error('Erro ao atualizar entregador.');
+      toast.error('Erro ao registrar destinatário.');
     }
   };
 
@@ -84,14 +70,14 @@ export const UpdateDeliverymanPage = () => {
           >
             <Link
               className={'flex justify-center items-center'}
-              to={'/entregadores'}
+              to={'/destinatarios'}
             >
               <ArrowLeft size={'20'} className={'mr-2'} /> VOLTAR
             </Link>
           </Button>
           <Card>
             <CardHeader>
-              <CardTitle>ATUALIZAR UM ENTREGADOR</CardTitle>
+              <CardTitle>REGISTRAR UM DESTINATÁRIO</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit}>
@@ -108,7 +94,17 @@ export const UpdateDeliverymanPage = () => {
                     <Label htmlFor="email">Email</Label>
                     <Input
                       id="email"
+                      type={'email'}
                       value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="email">Senha</Label>
+                    <Input
+                      id="password"
+                      type={'password'}
+                      value={formData.password}
                       onChange={handleChange}
                     />
                   </div>
@@ -130,7 +126,7 @@ export const UpdateDeliverymanPage = () => {
                   </div>
                 </div>
                 <Button className={'w-full mt-4'} type="submit">
-                  Atualizar entregador
+                  Registrar destinatário
                 </Button>
               </form>
             </CardContent>
@@ -141,4 +137,4 @@ export const UpdateDeliverymanPage = () => {
   );
 };
 
-export default UpdateDeliverymanPage;
+export default RegisterReceiverPage;
