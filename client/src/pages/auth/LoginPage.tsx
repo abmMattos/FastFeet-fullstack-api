@@ -40,7 +40,7 @@ export const LoginPage = () => {
         formData,
       );
       console.log(response.data);
-      navigate('/dashboard');
+      navigate('/encomendas');
     } catch (error) {
       console.error(error);
       setErrorMessage('Erro ao fazer login. Verifique suas credenciais.');
@@ -93,7 +93,7 @@ export const LoginPage = () => {
             Ainda não tem uma conta?{' '}
             <Link
               className={'text-emerald-500 hover:text-emerald-400'}
-              to={'/register'}
+              to={'/registro'}
             >
               Crie uma aqui
             </Link>

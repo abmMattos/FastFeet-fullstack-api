@@ -1,6 +1,7 @@
 import logo from '../assets/fastfeet-logo.png';
 import { cn } from '../lib/utils.ts';
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const location = useLocation();
@@ -11,8 +12,8 @@ export const Header = () => {
     cn(
       'cursor-pointer',
       isActive(route)
-        ? 'text-emerald-400'
-        : 'hover:text-emerald-500 text-gray-400',
+        ? 'text-emerald-500 border-b-2 border-solid border-emerald-500 '
+        : 'hover:text-emerald-600 text-gray-400',
     );
   return (
     <header
@@ -25,9 +26,15 @@ export const Header = () => {
       </div>
       <div>
         <ul className={'flex space-x-6 font-semibold text-gray-400'}>
-          <li className={navItemClass('/encomendas')}>ENCOMENDAS</li>
-          <li className={navItemClass('/entregadores')}>ENTREGADORES</li>
-          <li className={navItemClass('/destinatarios')}>DESTINATÁRIOS</li>
+          <li className={navItemClass('/encomendas')}>
+            <Link to={'/encomendas'}>ENCOMENDAS</Link>
+          </li>
+          <li className={navItemClass('/entregadores')}>
+            <Link to={'/entregadores'}>ENTREGADORES</Link>
+          </li>
+          <li className={navItemClass('/destinatarios')}>
+            <Link to={'/destinatarios'}>DESTINATÁRIOS</Link>
+          </li>
         </ul>
       </div>
     </header>

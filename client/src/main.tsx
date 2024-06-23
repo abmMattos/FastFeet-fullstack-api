@@ -9,6 +9,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/auth/LoginPage.tsx';
 import RegisterPage from './pages/auth/RegisterPage.tsx';
 import PackagesPage from './pages/packages/ui/pages/PackagesPage.tsx';
+import RegisterPackagePage from './pages/packages/ui/pages/RegisterPackagePage.tsx';
+import UpdatePackagePage from './pages/packages/ui/pages/UpdatePackagePage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,12 +18,20 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: '/register',
+    path: '/registro',
     element: <RegisterPage />,
   },
   {
-    path: '/packages',
+    path: '/encomendas',
     element: <PackagesPage />,
+  },
+  {
+    path: '/encomendas/registrar',
+    element: <RegisterPackagePage />,
+  },
+  {
+    path: '/encomendas/editar/:id',
+    element: <UpdatePackagePage />,
   },
   {
     path: '*',
