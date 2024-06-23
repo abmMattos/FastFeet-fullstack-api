@@ -9,7 +9,7 @@ const deliverymanController = new DeliverymanController();
 deliverymanRoutes.post('/register', deliverymanController.register);
 deliverymanRoutes.get('/login', deliverymanController.login);
 deliverymanRoutes.delete('/delete', deliverymanController.delete);
-deliverymanRoutes.put('/update', deliverymanController.update);
+deliverymanRoutes.put('/update/:id', deliverymanController.update);
 deliverymanRoutes.get('/', deliverymanController.findMany);
 deliverymanRoutes.get(
   '/findManyDeliveryUser',

@@ -52,7 +52,8 @@ class DeliverymanController {
 
   async update(request, response) {
     try {
-      const { id, name, email, password, location } = request.body;
+      const { id } = request.params;
+      const { name, email, password, location } = request.body;
       await prisma.deliveryman.update({
         where: {
           id,
@@ -72,16 +73,13 @@ class DeliverymanController {
 
   async findMany(request, response) {
     try {
-      const delivery = await prisma.deliveryman.findMany({
-        select: {
-          deliveryMan_id: true,
-          user_id: true,
-        },
-      });
+      const delivery = await prisma.deliveryman.findMany({});
+
+      console.log(delivery);
 
       return response.json(delivery);
     } catch (err) {
-      return response.status(409).send('Erro ao buscar DeliveryMan!');
+      return response.status(409).send('Erro ao buscar Deliveryman!');
     }
   }
 
