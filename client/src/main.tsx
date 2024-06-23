@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './reset.css';
+import './styles/reset.css';
+import './styles/fonts.css';
+import './styles/scrollbar.css';
 import './index.css';
 import { Navigate, RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/auth/LoginPage.tsx';
 import RegisterPage from './pages/auth/RegisterPage.tsx';
-import DashboardPage from './pages/dashboard/DashboardPage.tsx';
+import PackagesPage from './pages/packages/ui/pages/PackagesPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,8 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: '/dashboard',
-    element: <DashboardPage />,
+    path: '/packages',
+    element: <PackagesPage />,
   },
   {
     path: '*',

@@ -39,7 +39,10 @@ export const RegisterPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/register`, formData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/admin/register`,
+        formData,
+      );
       console.log(response.data);
       navigate('/login');
     } catch (error) {
@@ -49,7 +52,9 @@ export const RegisterPage = () => {
   };
 
   return (
-    <section className={'flex justify-center items-center h-screen bg-emerald-900'}>
+    <section
+      className={'flex justify-center items-center h-screen bg-emerald-900'}
+    >
       <Card className={'w-[360px] p-2'}>
         <CardHeader className={'text-center'}>
           <div className={'px-1 flex justify-center items-center'}>
@@ -65,11 +70,19 @@ export const RegisterPage = () => {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Nome</Label>
-                <Input id="name" value={formData.name} onChange={handleChange} />
+                <Input
+                  id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" value={formData.email} onChange={handleChange} />
+                <Input
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="cpf">CPF</Label>
@@ -77,15 +90,34 @@ export const RegisterPage = () => {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Senha</Label>
-                <Input id="password" value={formData.password} onChange={handleChange} type="password" />
+                <Input
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  type="password"
+                />
               </div>
             </div>
-            <Button className={'w-full mt-4'} type="submit">Criar conta</Button>
+            <Button className={'w-full mt-4'} type="submit">
+              Criar conta
+            </Button>
           </form>
-          {errorMessage && <CardDescription className="text-red-500 text-center mt-4">{errorMessage}</CardDescription>}
+          {errorMessage && (
+            <CardDescription className="text-red-500 text-center mt-4">
+              {errorMessage}
+            </CardDescription>
+          )}
         </CardContent>
         <CardFooter className="flex flex-col justify-center">
-          <CardDescription>Já tem uma conta? <Link className={'text-emerald-500 hover:text-emerald-400'} to={'/'}>Entre na sua conta</Link></CardDescription>
+          <CardDescription>
+            Já tem uma conta?{' '}
+            <Link
+              className={'text-emerald-500 hover:text-emerald-400'}
+              to={'/'}
+            >
+              Entre na sua conta
+            </Link>
+          </CardDescription>
         </CardFooter>
       </Card>
     </section>

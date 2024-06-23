@@ -35,7 +35,10 @@ export const LoginPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/admin/login`, formData);
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/admin/login`,
+        formData,
+      );
       console.log(response.data);
       navigate('/dashboard');
     } catch (error) {
@@ -45,7 +48,9 @@ export const LoginPage = () => {
   };
 
   return (
-    <section className={'flex justify-center items-center h-screen bg-emerald-900'}>
+    <section
+      className={'flex justify-center items-center h-screen bg-emerald-900'}
+    >
       <Card className={'w-[360px] p-2'}>
         <CardHeader className={'text-center'}>
           <div className={'px-1 flex justify-center items-center'}>
@@ -65,15 +70,34 @@ export const LoginPage = () => {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Senha</Label>
-                <Input id="password" value={formData.password} onChange={handleChange} type="password" />
+                <Input
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  type="password"
+                />
               </div>
             </div>
-            <Button className={'w-full mt-4'} type="submit">Entrar</Button>
+            <Button className={'w-full mt-4'} type="submit">
+              Entrar
+            </Button>
           </form>
-          {errorMessage && <CardDescription className="text-red-500 text-center mt-4">{errorMessage}</CardDescription>}
+          {errorMessage && (
+            <CardDescription className="text-red-500 text-center mt-4">
+              {errorMessage}
+            </CardDescription>
+          )}
         </CardContent>
         <CardFooter className="flex flex-col justify-center">
-          <CardDescription>Ainda não tem uma conta? <Link className={'text-emerald-500 hover:text-emerald-400'} to={'/register'}>Crie uma aqui</Link></CardDescription>
+          <CardDescription>
+            Ainda não tem uma conta?{' '}
+            <Link
+              className={'text-emerald-500 hover:text-emerald-400'}
+              to={'/register'}
+            >
+              Crie uma aqui
+            </Link>
+          </CardDescription>
         </CardFooter>
       </Card>
     </section>

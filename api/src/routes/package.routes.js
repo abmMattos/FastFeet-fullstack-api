@@ -9,9 +9,9 @@ packageRoutes.post('/register', packageController.register);
 packageRoutes.delete('/delete', packageController.delete);
 packageRoutes.put('/update', packageController.update);
 packageRoutes.get('/', packageController.findMany);
-packageRoutes.get(
+packageRoutes.post(
   '/findManyDeliveryUser',
-  packageController.findManyDeliveryUser,
+  packageController.findManyDeliveryUsers,
 );
 
 module.exports = packageRoutes;

@@ -70,6 +70,10 @@
     }
 }
 
+* {
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
 @layer base {
     * {
         @apply border-border;

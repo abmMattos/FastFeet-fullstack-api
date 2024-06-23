@@ -1,0 +1,11 @@
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+     @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-emerald-500;
+}

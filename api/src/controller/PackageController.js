@@ -63,22 +63,19 @@ class PackageController {
     }
   }
 
-  async findManyDeliveryUser(request, response) {
+  async findManyDeliveryUsers(request, response) {
     try {
-      const { id } = request.body;
-      const packages = await prisma.package.findUnique({
+      const { ids } = request.body;
+      const deliverymen = await prisma.deliveryman.findMany({
         where: {
-          id: id,
-        },
-        include: {
-          deliveryman_id: true,
-          user_id: true,
+          id: {
+            in: ids,
+          },
         },
       });
-
-      return response.json(packages);
-    } catch (err) {
-      return response.status(409).send('Erro ao buscar Package!');
+      return response.json(deliverymen);
+    } catch (error) {
+      return response.status(409).send('Erro ao buscar Deliverymen!');
     }
   }
 }
