@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_USER: senai
+      POSTGRES_PASSWORD: senai123
+      POSTGRES_DB: fastfeet-dev-db
+      PGPORT: 5435
+    ports:
+      - '5435:5435'
+    expose:
+      - '5435'
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U senai -d fastfeet-dev-db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-db:
