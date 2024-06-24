@@ -2,11 +2,14 @@ import logo from '../assets/fastfeet-logo.png';
 import { cn } from '../lib/utils.ts';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Button } from './ui/button.tsx';
 
 export const Header = () => {
   const location = useLocation();
 
   const isActive = (route: string) => location.pathname === route;
+
+  const userType = localStorage.getItem('userType');
 
   const navItemClass = (route: string) =>
     cn(
@@ -25,16 +28,24 @@ export const Header = () => {
         <img src={logo} alt={'Logo'} />
       </div>
       <div>
-        <ul className={'flex space-x-6 font-semibold text-gray-400'}>
+        <ul
+          className={'flex items-center space-x-6 font-semibold text-gray-400'}
+        >
           <li className={navItemClass('/encomendas')}>
             <Link to={'/encomendas'}>ENCOMENDAS</Link>
           </li>
-          <li className={navItemClass('/entregadores')}>
-            <Link to={'/entregadores'}>ENTREGADORES</Link>
-          </li>
+          {userType === 'ADMIN' && (
+            <li className={navItemClass('/entregadores')}>
+              <Link to={'/entregadores'}>ENTREGADORES</Link>
+            </li>
+          )}
           <li className={navItemClass('/destinatarios')}>
             <Link to={'/destinatarios'}>DESTINATÁRIOS</Link>
           </li>
+
+          <Link to={'/login'}>
+            <Button>SAIR</Button>
+          </Link>
         </ul>
       </div>
     </header>

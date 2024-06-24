@@ -17,13 +17,21 @@ export const PackagesTable = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
+  const userType = localStorage.getItem('userType');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const packageResponse = await axios.get<Package[]>(
+        const userId = localStorage.getItem('userId');
+        const userType = localStorage.getItem('userType');
+
+        const packageResponse = await axios.post<Package[]>(
           `${import.meta.env.VITE_API_URL}/package`,
+          { userId: userId, userType: userType },
         );
+
         const packages = packageResponse.data;
+
         setPackageData(packages);
 
         const deliverymanIds = packages.map((pkg) => pkg.deliveryman_id);
@@ -145,13 +153,15 @@ export const PackagesTable = () => {
                       onClick={() => handleEdit(pkg.id)}
                       size={20}
                     />
-                    <Trash
-                      className={
-                        'text-red-400 hover:text-red-500 cursor-pointer'
-                      }
-                      onClick={() => handleDelete(pkg.id)}
-                      size={20}
-                    />
+                    {userType === 'ADMIN' && (
+                      <Trash
+                        className={
+                          'text-red-400 hover:text-red-500 cursor-pointer'
+                        }
+                        onClick={() => handleDelete(pkg.id)}
+                        size={20}
+                      />
+                    )}
                   </td>
                 </tr>
               ))}

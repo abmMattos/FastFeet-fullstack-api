@@ -11,6 +11,8 @@ export const ReceiverTable = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
+  const userType = localStorage.getItem('userType');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -82,9 +84,11 @@ export const ReceiverTable = () => {
                 <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-lg font-bold leading-4 text-emerald-700">
                   Localização
                 </th>
-                <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-lg font-bold leading-4 text-emerald-700">
-                  Ações
-                </th>
+                {userType === 'ADMIN' && (
+                  <th className="px-6 py-3 border-b-2 border-gray-300 text-left text-lg font-bold leading-4 text-emerald-700">
+                    Ações
+                  </th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -100,22 +104,24 @@ export const ReceiverTable = () => {
                   <td className="px-6 py-4 whitespace-no-wrap">
                     {dm.location ?? 'Não especificado'}
                   </td>
-                  <td className="flex items-center px-6 whitespace-no-wrap">
-                    <Pen
-                      className={
-                        'text-teal-400 hover:text-teal-500 cursor-pointer mr-2'
-                      }
-                      onClick={() => handleEdit(dm.id)}
-                      size={20}
-                    />
-                    <Trash
-                      className={
-                        'text-red-400 hover:text-red-500 cursor-pointer'
-                      }
-                      onClick={() => handleDelete(dm.id)}
-                      size={20}
-                    />
-                  </td>
+                  {userType === 'ADMIN' && (
+                    <td className="flex items-center px-6 whitespace-no-wrap">
+                      <Pen
+                        className={
+                          'text-teal-400 hover:text-teal-500 cursor-pointer mr-2'
+                        }
+                        onClick={() => handleEdit(dm.id)}
+                        size={20}
+                      />
+                      <Trash
+                        className={
+                          'text-red-400 hover:text-red-500 cursor-pointer'
+                        }
+                        onClick={() => handleDelete(dm.id)}
+                        size={20}
+                      />
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

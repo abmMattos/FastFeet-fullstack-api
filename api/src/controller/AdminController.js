@@ -23,15 +23,20 @@ class AdminController {
   async login(request, response) {
     try {
       const { cpf, password } = request.body;
-      await prisma.admin.findUnique({
+      const user = await prisma.admin.findUnique({
         where: {
           cpf: cpf,
           password: password,
         },
       });
+
+      if (!user) {
+        return response.status(400).send('Usuário não existe');
+      }
+
       return response.status(200).send('Login realizado com sucesso!');
     } catch {
-      return response.status(404).send('Login falhou!');
+      return response.status(401).send('Login falhou!');
     }
   }
 

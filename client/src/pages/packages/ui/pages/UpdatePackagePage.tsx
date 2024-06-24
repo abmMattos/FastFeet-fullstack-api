@@ -40,6 +40,9 @@ export const UpdatePackagePage = () => {
     location: '',
   });
 
+  const userType = localStorage.getItem('userType');
+  const isAdmin = userType === 'ADMIN';
+
   useEffect(() => {
     const fetchPackageData = async () => {
       try {
@@ -130,14 +133,16 @@ export const UpdatePackagePage = () => {
             <CardContent>
               <form onSubmit={handleSubmit}>
                 <div className="grid w-full items-center gap-4">
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="user_name">Nome do usuário</Label>
-                    <Input
-                      id="user_name"
-                      value={formData.user_name}
-                      onChange={handleChange}
-                    />
-                  </div>
+                  {isAdmin && (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="user_name">Nome do usuário</Label>
+                      <Input
+                        id="user_name"
+                        value={formData.user_name}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  )}
                   <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="status">Status</Label>
                     <Select
@@ -158,22 +163,28 @@ export const UpdatePackagePage = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="deliveryman_name">Nome do entregador</Label>
-                    <Input
-                      id="deliveryman_name"
-                      value={formData.deliveryman_name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="location">Localização</Label>
-                    <Input
-                      id="location"
-                      value={formData.location}
-                      onChange={handleChange}
-                    />
-                  </div>
+                  {isAdmin && (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="deliveryman_name">
+                        Nome do entregador
+                      </Label>
+                      <Input
+                        id="deliveryman_name"
+                        value={formData.deliveryman_name}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  )}
+                  {isAdmin && (
+                    <div className="flex flex-col space-y-1.5">
+                      <Label htmlFor="location">Localização</Label>
+                      <Input
+                        id="location"
+                        value={formData.location}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  )}
                 </div>
                 <Button className={'w-full mt-4'} type="submit">
                   Atualizar encomenda

@@ -6,23 +6,28 @@ import { Link, Route, Routes } from 'react-router-dom';
 import UpdatePackagePage from './UpdatePackagePage.tsx';
 
 export const PackagesPage = () => {
+  const userType = localStorage.getItem('userType');
+
   return (
     <>
       <section className={'bg-emerald-900 min-h-screen'}>
         <Header />
         <div className={'p-12'}>
-          <Button
-            className={
-              'flex mb-6 ml-auto bg-emerald-300 hover:bg-emerald-400 text-gray-800 font-bold'
-            }
-          >
-            <Link
-              className={'flex justify-center items-center'}
-              to={'/encomendas/registrar'}
+          {userType === 'ADMIN' && (
+            <Button
+              className={
+                'flex mb-6 ml-auto bg-emerald-300 hover:bg-emerald-400 text-gray-800 font-bold'
+              }
             >
-              <PlusIcon className={'mr-2'} /> REGISTRAR ENCOMENDA
-            </Link>
-          </Button>
+              <Link
+                className={'flex justify-center items-center'}
+                to={'/encomendas/registrar'}
+              >
+                <PlusIcon className={'mr-2'} /> REGISTRAR ENCOMENDA
+              </Link>
+            </Button>
+          )}
+
           <Routes>
             <Route path="/" element={<PackagesTable />} />
             <Route path="/editar/:id" element={<UpdatePackagePage />} />

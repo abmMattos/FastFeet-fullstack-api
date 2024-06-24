@@ -24,13 +24,13 @@ class DeliverymanController {
   async login(request, response) {
     try {
       const { cpf, password } = request.body;
-      await prisma.deliveryman.findUnique({
+      const deliveryman = await prisma.deliveryman.findUnique({
         where: {
           cpf: cpf,
           password: password,
         },
       });
-      return response.status(200).send('Login realizado!');
+      return response.json(deliveryman['id']);
     } catch {
       return response.status(404).send('Erro ao logar!');
     }

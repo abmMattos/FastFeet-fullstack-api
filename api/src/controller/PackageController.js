@@ -102,8 +102,23 @@ class PackageController {
 
   async findMany(request, response) {
     try {
-      const packages = await prisma.package.findMany();
-      return response.json(packages);
+      const { userId, userType } = request.body;
+
+      if (userType === 'ADMIN' && userId === 'ADMIN_ID') {
+        const packages = await prisma.package.findMany();
+
+        return response.json(packages);
+      }
+
+      if (userType === 'ENTREGADOR' && userId) {
+        const deliverymanPackages = await prisma.package.findMany({
+          where: { deliveryman_id: userId },
+        });
+
+        return response.json(deliverymanPackages);
+      }
+
+      return response.status(401).send('Invalid User');
     } catch (error) {
       console.error(error);
       return response.status(500).send('Error fetching packages!');
