@@ -1,7 +1,7 @@
 <h1 align="center">
-  <p><img src='./client/src/assets/fastfeet-logo.png' height="44"></p>
+  <p><img src='./client/src/assets/fastfeet-logo.png' height="60"></p>
  # Fastfeet App :truck:
-Trata-se de uma aplicação para gerenciamento de encomendas/delivery para uma distribuidora ficitícia, a FastFeet.
+<p>Trata-se de uma aplicação para gerenciamento de encomendas/delivery para uma distribuidora ficitícia, a FastFeet.</p>
 </h1>
 ---
 
@@ -25,7 +25,7 @@ Trata-se de uma aplicação para gerenciamento de encomendas/delivery para uma d
 
 ## 💻 Acessando a aplicação
 
-(https://fastfeet-fullstack-client-1.onrender.com/login)
+https://fastfeet-fullstack-client-1.onrender.com/login
 
 ---
 
