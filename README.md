@@ -50,5 +50,4 @@ https://fastfeet-fullstack-client-1.onrender.com/
 
 > Página de Login
 
- <img src="![image](https://github.com/abmMattos/FastFeet-fullstack-api/assets/112215381/d1c15675-84a2-47f6-9dcd-16e202081ac3)
-" alt="Página de login" />
+ <img src="https://imgur.com/tSLEhgI" alt="Página de login" />
