@@ -50,4 +50,49 @@ https://fastfeet-fullstack-client-1.onrender.com/
 
 > Página de Login
 
- <img src="https://imgur.com/tSLEhgI" alt="Página de login" />
+ <img src="./screens/tela-login.png" alt="Página de login" />
+
+> Página de Encomendas
+
+ <img src="./screens/tela-encomendas.png" alt="Página de encomendas" />
+
+ > Página de Cadastrar Encomenda
+
+ <img src="./screens/tela-cadastrar-encomenda.png" alt="Página de cadastrar encomenda" />
+
+ > Página de Atualizar Encomenda
+
+ <img src="./screens/tela-atualizar-encomenda.png" alt="Página de atualizar encomenda" />
+
+ > Página de Entregadores
+
+ <img src="./screens/tela-entregadores.png" alt="Página de entregadores" />
+
+ > Página de Cadastrar Entregador
+
+ <img src="./screens/tela-registrar-entregador.png" alt="Página de cadastrar entregador" />
+
+ > Página de Atualizar Entregador
+
+ <img src="./screens/tela-atualizar-entregador.png" alt="Página de atualizar entregador" />
+
+ > Página Logado como Entregador
+
+ <img src="./screens/tela-login-de-entregador.png" alt="Página logado como entregador" />
+
+ > Página de Alterar Status de Encomenda como Entregador
+
+ <img src="./screens/tela-atualizar-status-entregador.png" alt="Página de status de encomenda" />
+
+ > Página de Destinatários
+
+ <img src="./screens/tela-destinatarios.png" alt="Página de destinatarios" />
+
+ > Página de Cadastrar Destinatário
+
+ <img src="./screens/tela-cadastrar-destinatario.png" alt="Página de cadastrar destinatario" />
+
+> Página de Atualizar Destinatário
+
+ <img src="./screens/tela-atualizar-destinatario.png" alt="Página de atualizar destinatario" />
+
