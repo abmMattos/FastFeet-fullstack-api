@@ -20,6 +20,7 @@ type UpdateDeliverymanData = {
   email: string;
   cpf: string;
   location: string;
+  password: string;
 };
 
 export const UpdateDeliverymanPage = () => {
@@ -29,6 +30,7 @@ export const UpdateDeliverymanPage = () => {
     email: '',
     cpf: '',
     location: '',
+    password: '',
   });
 
   useEffect(() => {
@@ -43,6 +45,7 @@ export const UpdateDeliverymanPage = () => {
           email: deliverymanData.email,
           cpf: deliverymanData.cpf,
           location: deliverymanData.location,
+          password:'',
         });
       } catch (error) {
         console.error('Erro ao buscar dados do entregador:', error);
@@ -118,6 +121,15 @@ export const UpdateDeliverymanPage = () => {
                       id="cpf"
                       value={formData.cpf}
                       onChange={handleChange}
+                    />
+                  </div>
+                  <div className="flex flex-col space-y-1.5">
+                    <Label htmlFor="password">Senha</Label>
+                    <Input
+                      id="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      type="password"
                     />
                   </div>
                   <div className="flex flex-col space-y-1.5">
