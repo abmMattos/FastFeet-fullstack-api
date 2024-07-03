@@ -17,7 +17,6 @@ import { ArrowLeft } from 'lucide-react';
 type RegisterReceiverData = {
   name: string;
   email: string;
-  password: string;
   cpf: string;
   location: string;
 };
@@ -26,7 +25,6 @@ export const RegisterReceiverPage = () => {
   const [formData, setFormData] = useState<RegisterReceiverData>({
     name: '',
     email: '',
-    password: '',
     cpf: '',
     location: '',
   });
@@ -43,11 +41,10 @@ export const RegisterReceiverPage = () => {
         formData,
       );
       console.log(response.data);
-      toast.success('Entregador registrado com sucesso!');
+      toast.success('Destinatário registrado com sucesso!');
       setFormData({
         name: '',
         email: '',
-        password: '',
         cpf: '',
         location: '',
       });
@@ -96,15 +93,6 @@ export const RegisterReceiverPage = () => {
                       id="email"
                       type={'email'}
                       value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="email">Senha</Label>
-                    <Input
-                      id="password"
-                      type={'password'}
-                      value={formData.password}
                       onChange={handleChange}
                     />
                   </div>
