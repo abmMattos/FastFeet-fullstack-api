@@ -43,7 +43,7 @@ export const RegisterReceiverPage = () => {
         formData,
       );
       console.log(response.data);
-      toast.success('Entregador registrado com sucesso!');
+      toast.success('Destinatário registrado com sucesso!');
       setFormData({
         name: '',
         email: '',
