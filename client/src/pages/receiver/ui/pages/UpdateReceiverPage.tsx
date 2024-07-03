@@ -64,7 +64,7 @@ export const UpdateReceiverPage = () => {
         formData,
       );
       console.log(response.data);
-      toast.success('Destinatário atualizado com sucesso!');
+      toast.success('Entregador atualizado com sucesso!');
     } catch (error) {
       console.error(error);
       toast.error('Erro ao atualizar destinatário.');
